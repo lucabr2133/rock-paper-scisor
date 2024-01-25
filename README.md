@@ -1,2 +1,2 @@
 # rock-paper-scisor
-rock papes scisor game
+rock papes scisor game functional
