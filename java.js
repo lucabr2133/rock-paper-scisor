@@ -1,3 +1,11 @@
+const buttonpiedra=document.querySelector(".piedra")
+const buttontijera=document.querySelector(".tijera")
+const buttonpapel=document.querySelector(".papel")
+const div=document.querySelector(".result");
+
+
+
+
 const computerchoice=()=>{
         let numrandom=Math.floor(Math.random()*3+1)
         if(numrandom==1){
@@ -9,23 +17,24 @@ const computerchoice=()=>{
         }
 
 }
-let userchoice=prompt("rock,papel,tijera");
-let userchoicemin=userchoice.toLowerCase();
+
 let winusercont=0;
 let winmachinecount=0;
 const playgame=(playerSelection,computerSelection)=>{
- 
-
+    
+    
+  
     if(computerSelection==="piedra" ){
         if( playerSelection==="tijera"){
             winmachinecount++
-            return "You Lose! Rock beats scissors"
+            
+          
         }else if(playerSelection==="papel"){
             winusercont++
-            return "You Win! Rock beats paper"
+
         }else if(playerSelection==="rock"){
             let computeroptiom=computerchoice();
-            return playgame(userchoicemin, computeroptiom)
+            
          
         }
         
@@ -34,13 +43,14 @@ const playgame=(playerSelection,computerSelection)=>{
     if(computerSelection==="tijera" ){
         if( playerSelection==="tijera"){
             let computeroptiom=computerchoice();
-            return playgame(userchoicemin, computeroptiom)
+           
         }else if(playerSelection==="papel"){
             winmachinecount++
-            return "You lose! scissors beats papel"
+          
         }else if(playerSelection==="rock"){
             winusercont++
-            return "You Win! Rock beats scissors"
+       
+          
         }
         
        
@@ -48,32 +58,43 @@ const playgame=(playerSelection,computerSelection)=>{
     if(computerSelection==="papel" ){
         if( playerSelection==="tijera"){
             winusercont++
-            return "You Win! scissors beats papel"
+         
+        
         }else if(playerSelection==="papel"){
             let computeroptiom=computerchoice();
-            return playgame(userchoicemin, computeroptiom)
+         
         }else if(playerSelection==="rock"){
             winmachinecount++
-            return "You Lose! Paper beats rock"
+        
         }
         
-       
+      
     }
-    
+    div.textContent=`Tu elegiste ${playerSelection} La maquina ${computerchoice()} 
+        tu puntuacion ${winusercont} la de la maquina ${winmachinecount}
+    `
+    if(winusercont>=5){
+        div.textContent="you win"
+        winmachinecount=0;
+        winusercont=0;
+    }else if(winmachinecount>=5){
+        div.textContent="you lose"
+        winmachinecount=0;
+        winusercont=0;
+    }
+   
 }
 
-const winOlose=()=>{
-    for (let i = 0; i < 5; i++) {
-        let computeroptiom=computerchoice();
-        console.log(playgame(userchoicemin, computeroptiom),)
-        console.log('');
-        
-    }
+buttonpiedra.addEventListener("click",()=>{
     
-    if(winmachinecount>winusercont){
-        console.log("sorry you lose")
-    }else{
-        console.log("execelent you a winner")
-    }
-}
-winOlose()
+    playgame("rock",computerchoice())
+})
+buttonpapel.addEventListener("click",()=>{
+
+    playgame("papel",computerchoice())
+})
+
+buttontijera.addEventListener("click",()=>{
+
+    playgame("tijera",computerchoice())
+})
